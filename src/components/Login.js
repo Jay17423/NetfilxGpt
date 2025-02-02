@@ -1,6 +1,9 @@
 import React, { useRef, useState } from 'react'
 import Header from './Header'
 import {checkValidData} from "../utils/Validate.js"
+import {createUserWithEmailAndPassword ,signInWithEmailAndPassword} from "firebase/auth";
+import { auth } from '../utils/firebase.js';
+
 
 const Login = () => {
   const [isSignInForm,setIsSingInForm] = useState(true);
@@ -15,6 +18,45 @@ const Login = () => {
   const handleButtonClick = () =>{
     const message =  checkValidData(email.current.value,password.current.value)
     setErrorMsg(message);
+    if(message) return;
+
+    //SigIn and signUp logic
+    if(!isSignInForm){
+      //This is my signUp Logic
+      createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
+      .then((userCredential) => {
+      // Signed up 
+      const user = userCredential.user;
+      console.log(user);
+      
+      // ...
+      })
+      .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      setErrorMsg(errorCode+"-"+errorMessage)
+      // ..
+      });
+
+    }
+    else{
+      //This is my signIn logic
+      signInWithEmailAndPassword(auth, email.current.value, password.current.value)
+      .then((userCredential) => {
+      // Signed in 
+      const user = userCredential.user;
+      
+      
+      // ...
+      })
+      .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      setErrorMsg(errorCode+"-"+errorMessage)
+    
+  });
+
+    }
   
   }
   return (
