@@ -6,6 +6,8 @@ import { useEffect } from "react";
 import { auth } from "../utils/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { addUser } from "../utils/userSlice";
+import { LOGO,PHOTO_URL } from "../utils/constant";
+
 
 const Header = () => {
   const user = useSelector(store => store.user)
@@ -23,7 +25,7 @@ const Header = () => {
 
   }
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         const { uid, email, displayName, photoURL } = user;
         dispatch(
@@ -31,7 +33,7 @@ const Header = () => {
             uid: uid,
             email: email,
             displayName: displayName,
-            photoURL: photoURL,
+            photoURL: PHOTO_URL,
           })
         );
         navigate("/browse")
@@ -42,10 +44,11 @@ const Header = () => {
         navigate("/")
       }
     });
+    return () => unsubscribe() // This will remove the event listner from our browser to make it fast
   }, []);
   return (
     <div className='absolute px-8 w-screen py-2 bg-gradient-to-b from-black z-10 flex justify-between' >
-       <img className='w-44' src='https://images.ctfassets.net/y2ske730sjqp/821Wg4N9hJD8vs5FBcCGg/9eaf66123397cc61be14e40174123c40/Vector__3_.svg?w=460' alt='Logo'></img>
+       <img className='w-44' src={LOGO} alt='Logo'></img>
       { user &&  (<div className='flex flex-wrap '>
       <img src={ user.photoURL} className='h-10 w-10 m-4' alt='userIcon'></img>
         <button className='font-bold text-xl' onClick={handleSignOut} >Sign Out</button>   
