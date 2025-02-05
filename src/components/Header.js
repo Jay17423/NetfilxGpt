@@ -40,7 +40,7 @@ const Header = () => {
         
       } else {
         // User is signed out
-        dispatch(removeUser);
+        dispatch(removeUser());
         navigate("/")
       }
     });
@@ -51,7 +51,7 @@ const Header = () => {
        <img className='w-44' src={LOGO} alt='Logo'></img>
       { user &&  (<div className='flex flex-wrap '>
       <img src={ user.photoURL} className='h-10 w-10 m-4' alt='userIcon'></img>
-        <button className='font-bold text-xl' onClick={handleSignOut} >Sign Out</button>   
+        <button className='font-bold text-xl text-white' onClick={handleSignOut} >Sign Out</button>   
        </div>)}
     </div>
 
