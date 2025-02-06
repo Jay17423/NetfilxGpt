@@ -35,7 +35,7 @@ const GptSearchBar = () => {
       model: "gpt-4o-mini",
     });
     const gptMovies = gptResults.choices[0]?.message?.content.split(",");
-    console.log(gptMovies);
+    // console.log(gptMovies);
 
     //for each movie i will search TMBD API
 
@@ -43,7 +43,7 @@ const GptSearchBar = () => {
     // [Promise,Promise,Promise,Promise,Promise] this will be our result beacuse serachMovieTMDB is a asynch function and it will take time and map will exec without waiting
 
     const tmdbResults = await Promise.all(promiseArray);
-    console.log(tmdbResults);
+    // console.log(tmdbResults);
     dispatch(
       addGptMovieResult({ moviesName: gptMovies, movieResults: tmdbResults })
     );
