@@ -9,7 +9,7 @@ import { auth } from "../utils/firebase.js";
 import { updateProfile } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice.js";
-import { PHOTO_URL } from "../utils/constant.js";
+import { BG_URL, PHOTO_URL } from "../utils/constant.js";
 
 const Login = () => {
   const [isSignInForm, setIsSingInForm] = useState(true);
@@ -92,7 +92,7 @@ const Login = () => {
       <Header />
       <div className="absolute inset-0 -z-10">
         <img
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/fb5cb900-0cb6-4728-beb5-579b9af98fdd/web/IN-en-20250127-TRIFECTA-perspective_cf66f5a3-d894-4185-9106-5f45502fc387_large.jpg"
+          src={BG_URL}
           className="w-full h-full object-cover"
           alt="Background"
         />

@@ -11,4 +11,12 @@ export const API_OPTIONS = {
   },
 };
 
-export const IMG_CDN_URL = "https://image.tmdb.org/t/p/w780"
+export const IMG_CDN_URL = "https://image.tmdb.org/t/p/w780";
+export const BG_URL =
+  "https://assets.nflxext.com/ffe/siteui/vlv3/fb5cb900-0cb6-4728-beb5-579b9af98fdd/web/IN-en-20250127-TRIFECTA-perspective_cf66f5a3-d894-4185-9106-5f45502fc387_large.jpg";
+
+export const SUPPORTED_LANGUAGES = [
+  { identifier: "en", name: "English" },
+  { identifier: "hindi", name: "Hindi" },
+  { identifier: "spanish", name: "Spanish" },
+];
